@@ -3,7 +3,7 @@
 Simulates the short-term dynamics of microbiomes within a population of hosts with host subpopulation structure and dispersal limitation.
 
 
-###Parameters
+### Parameters
 
 Under our neutral model, several parameters are adjustable:
   1. pct_evn: Percentage of environmental acquisition, 1-pct_evn is the proportion of parental inheritance.
@@ -85,6 +85,6 @@ To run the simulation from terminal with six arguments taken.
 
 
 
-##Development
+## Development
 
 Our selection and horizontal gene transfer (HGT) model are still under developing process.
