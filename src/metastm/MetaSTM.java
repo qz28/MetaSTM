@@ -55,23 +55,24 @@ public class MetaSTM{
 		options.addOption(Option.builder("r").longOpt("rep").hasArg()
 				.argName("REP").desc("Number of replication [default: 1]")
 				.build());
-					
+		
+				
 		Builder C = Option.builder("c").longOpt("config")
 				.numberOfArgs(4).argName("Pop Micro Spec Gen")
 				.desc("Four Parameters in the following orders: "
 						+ "(1) population size, (2) microbe size, (3) number of species, (4) number of generation"
-						+ " [default: 4096 1000000 128 1]");
+						+ " [default: 4096 1000000 129 1]");
 		options.addOption(C.build());
 
 		HelpFormatter formatter = new HelpFormatter();
-		String syntax = "microbiosima pctEnv pctPool";
+		String syntax = "MetaSTM pctEnv pctPool Ns Dr";
 		String header = 
 				"\nSimulates the evolutionary and ecological dynamics of microbiomes within a population of hosts.\n\n"+
 "required arguments:\n"+
 "  pctEnv             Percentage of environmental acquisition\n"+
 "  pctPool            Percentage of pooled environmental component\n"+
 "  Ns                 Number of subpopulations\n"+
-"  Dr      Percentage of hosts who migrate within one time step"
+"  Dr                 Percentage of hosts who migrate within one time step"
 + "\noptional arguments:\n";
 		String footer = "\n";
 		
@@ -105,9 +106,9 @@ public class MetaSTM{
 				pooled_or_fixed = Double.parseDouble(pct_config[1]);
 				Ns=Integer.parseInt(pct_config[2]);
 				dispersal_rate=Double.parseDouble(pct_config[3]);
-				if(environmental_factor<0 || environmental_factor >1){
+				if(environmental_factor<0 || environmental_factor >=1){
 					System.out.println(
-						"ERROR: pctEnv (Percentage of environmental acquisition) must be between 0 and 1 (pctEnv="
+						"ERROR: pctEnv (Percentage of environmental acquisition) must be between 0  and 1 (exclusive) (pctEnv="
 						+ environmental_factor + ")! EXIT");
 					System.exit(3);
 				}
@@ -123,10 +124,10 @@ public class MetaSTM{
 						+ dispersal_rate + ")! EXIT");
 					System.exit(3);
 				}
-				if(Ns<0 || Ns >Nc){
+				if(Ns<=0 || Ns >Nc){
 					System.out.println(
-						"ERROR: pctPool (Host migration rate must) must be an integer between 0 and population size:"+Nc+"(Ns="
-						+ dispersal_rate + ")! EXIT");
+						"ERROR: pctPool (Host migration rate must) must be an integer between 0 (exclusive) and population size:"+Nc+"(Ns="
+						+ Ns + ")! EXIT");
 					System.exit(3);
 				}
 				
@@ -190,7 +191,7 @@ public class MetaSTM{
         for (int i=0;i<Nc;i++){
             int j=0;
             for (String s:fr.getCommandSpilt(i)){
-                inputMicrobiomes[i][j]= Double.parseDouble(s)/Nm;
+                inputMicrobiomes[i][j]= Double.parseDouble(s);
                 j++;
             }
         }

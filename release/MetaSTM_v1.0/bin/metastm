@@ -1,0 +1,27 @@
+#!/bin/sh
+
+if [ -z "$METASTM" ]; then
+	## resolve links - $0 may be a link to application
+	PRG="$0"
+
+	# need this for relative symlinks
+	while [ -h "$PRG" ] ; do
+	    ls=`ls -ld "$PRG"`
+	    link=`expr "$ls" : '.*-> \(.*\)$'`
+	    if expr "$link" : '/.*' > /dev/null; then
+		PRG="$link"
+	    else
+		PRG="`dirname "$PRG"`/$link"
+	    fi
+	done
+
+	# make it fully qualified
+	saveddir=`pwd`
+	METASTM0=`dirname "$PRG"`/..
+	METASTM=`cd "$METASTM0" && pwd`
+
+	cd "$saveddir"
+fi
+
+METASTM_LIB="$METASTM/lib"
+java -Xms64m -Xmx2048m -Djava.library.path="$METASTM_LIB:/usr/local/lib:$LD_LIBRARY_PATH" -cp "$METASTM_LIB/MetaSTM.jar" metastm.MetaSTM $*

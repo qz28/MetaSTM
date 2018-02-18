@@ -61,7 +61,7 @@ public class MetaPopulation {
         sampleReplicates=sampleReplicates0;
         metaSum=new double[environment.length];
         cumHostNoInSp=new double[nosp];
-        int[] cluster=sp.getNumericIntArray((int)(Math.log(nosp)/Math.log(2)+0.1));
+        int[] cluster=sp.getNumericIntArray(nosp-1);
         int firstId=0;
         Multinomial2 fixEnvDist=new Multinomial2(environment.length);
         fixEnvDist.updateProb(environment);
