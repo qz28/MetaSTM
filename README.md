@@ -18,16 +18,17 @@ Under our neutral model, several parameters are adjustable:
   10. replication: the number of simulation with the same parameters you want to repeat  
 
 ### Inputs
-  1.environment.txt: a text file specifying the abundance distribution in the fixed environmental component. The number of lines must be equal to the number of species parameter.
-  2.simulated_initial.txt: a text file specifying the initial abundance distribution in the host population. Each line corresponds to the microbiome composition of one host and the number of lines is equal to host population size parameter. 
-  3.simulated_sub.txt: a text file specifying the initial assignment of hosts to subpopulations. The ith line corresponds to the assignment when Ns=i and the number of lines is equal to host population size parameter.
+  1. environment.txt: a text file specifying the abundance distribution in the fixed environmental component. The number of lines must be equal to the number of species parameter.
+  2. simulated_initial.txt: a text file specifying the initial abundance distribution in the host population. Each line corresponds to the microbiome composition of one host and the number of lines is equal to host population size parameter. 
+  3. simulated_sub.txt: a text file specifying the initial assignment of hosts to subpopulations. The ith line corresponds to the assignment when Ns=i and the number of lines is equal to host population size parameter.
   
 We also provide a python script called "simulate_initial_sub.py" which takes a input file "samples.txt" (containing empirical microbiome compositional data) to simulate 4096 or a given number of microbiome samples and also generate a simulated_sub.txt file for you.
 Run it from terminal with
  ```bash
 python simulate_initial_sub.py <numberOfHosts>
 ```
-If the argument numberOfHosts is optional, the default value is 4096 if it is not provided. 
+The argument numberOfHosts is optional, the default value is 4096 if it is not provided. 
+
 Note: this script requires your python has numpy and sklearn packages installed and may take up to two days to finish since generating host assignment is computationally intensive. But it only needs to be run for once as long as your samples.txt is not updated. 
 
 ### Requirement:
